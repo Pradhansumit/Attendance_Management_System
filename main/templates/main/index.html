@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Homepage{% endblock title %}
+{% block body %}
+<main>
+<div class="container d-flex flex-column align-items-center justify-content-center mt-5">
+  <div class="container login-form rounded border border-danger p-5 w-50">
+  <div class="row">
+    <h3>Login to SP University</h3>
+    <p>Enter mobile no. and password to log in:</p>
+  </div>
+  <div class="row rounded">
+    <form action="" method="POST">
+      {% csrf_token %}
+      {{ form | crispy }}
+      <input class="btn form-btn" type="submit" value="Submit">
+    </form>
+  </div></div>
+</div>
+</main>
+{% endblock body %}

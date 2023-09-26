@@ -1,0 +1,17 @@
+.login-form {
+  background-color: rgba(255, 201, 201, 0.7);
+}
+
+.form-btn {
+  border: solid 2px rgba(255, 255, 255, 0.8);
+  background-color: #ff8787;
+  border-radius: 10px;
+  transition: all ease .3s;
+}
+
+.form-btn:hover {
+  border: solid 2px rgba(255, 255, 255, 0.8);
+  background-color: #ff8787;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
