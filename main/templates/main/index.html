@@ -10,7 +10,7 @@
     <p>Enter mobile no. and password to log in:</p>
   </div>
   <div class="row rounded">
-    <form action="" method="POST">
+    <form action="{% url "home" %}" method="POST">
       {% csrf_token %}
       {{ form | crispy }}
       <input class="btn form-btn" type="submit" value="Submit">
