@@ -3,5 +3,52 @@
 {% load crispy_forms_tags %}
 {% block title %}Student-Dashboard{% endblock title %}
 {% block body %}
-<h1 class="text-center text-danger">Teacher Dashboard</h1>
+<main>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="container-fluid student-title-bg p-3 me-3">
+        <h1 class="student-heading text-center">Mark Your Attendance</h1>
+      </div>
+    </div>
+    {% include "main/navigation.html" %}
+    <div class="row">
+      <div class="container pt-5 d-flex flex-row align-items-start justify-content-around">
+        <div class="col-lg-3  border border-secondary-subtle bg-gray-light border-3 rounded p-5">
+          <h2>Select the class and division</h2>
+          <form action="" method="POST">
+            {% csrf_token %}
+            <select name="division" id="division" class="form-select" aria-label="Default select example">
+            <option value="1">BCA A</option>
+            <option value="2">BCA B</option>
+            <option value="3">BCA C</option>
+            <option value="4">MCA A</option>
+            <option value="5">MCA B</option>
+            </select>
+          </form>
+        </div>
+        {% comment "" %}for the right column{% endcomment %}
+        <div class="col-lg-7 offset-1 border border-secondary-subtle bg-gray-light border-3 p-5">
+          <div class="container-fluid d-flex flex-row align-items-center justify-content-around">
+            <div class="container bg-body border border-seconary-subtle border-2 rounded d-flex flex-row align-items-center justify-content-around py-2 mb-3">
+              <h5 class="slot-title">Slot No. 1</h5>
+              <button id="slot-btn" class="btn btn-primary">Unlock</button>
+            </div>
+          </div>
+          <div class="container-fluid d-flex flex-row align-items-center justify-content-around">
+            <div class="container bg-body border border-seconary-subtle border-2 rounded d-flex flex-row align-items-center justify-content-around py-2 mb-3">
+              <h5 class="slot-title">Slot No. 2</h5>
+              <button id="slot-btn" class="btn btn-primary">Unlock</button>
+            </div>
+          </div>
+          <div class="container-fluid d-flex flex-row align-items-center justify-content-around">
+            <div class="container bg-body border border-seconary-subtle border-2 rounded d-flex flex-row align-items-center justify-content-around py-2">
+              <h5 class="slot-title">Slot No. 3</h5>
+              <button id="slot-btn" class="btn btn-primary">Unlock</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 {% endblock body %}

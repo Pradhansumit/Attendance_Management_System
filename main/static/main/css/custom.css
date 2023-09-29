@@ -1,3 +1,9 @@
+/* overriding the bootstrap classes starts*/
+.p-4 {
+  padding: 2rem !important;
+}
+
+/* overriding the bootstrap classes end*/
 .login-form {
   background-color: rgba(255, 201, 201, 0.7);
 }
@@ -14,4 +20,49 @@
   background-color: #ff8787;
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+.student-title-bg {
+  color: white;
+  background-color: #ff8787;
+  border: 4px solid #fc6565;
+  border-top: 0;
+}
+
+.student-slog-bg {
+  background-color: #f8f9fa;
+  border: 4px solid #868e96;
+}
+
+.remove-bullet {
+  list-style: none;
+}
+
+.bg-gray {
+  background-color: #f0f0f0;
+  border-bottom: 5px solid #9170E4;
+}
+
+.bg-gray-light {
+  background-color: rgb(249, 249, 249);
+}
+
+ul {
+  padding: 0 !important;
+  margin-bottom: 0;
+}
+
+ul.d-flex.remove-bullet li.nav-links {
+  font-size: 18px;
+  text-transform: uppercase;
+  transition: all ease 0.2s;
+}
+
+ul.d-flex.remove-bullet li.nav-links:hover {
+  background-color: #dadada;
+}
+
+a.nav-link {
+  text-decoration: none;
+  color: black;
 }
