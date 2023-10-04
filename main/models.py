@@ -41,3 +41,11 @@ class Accounts(AbstractBaseUser):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
+
+
+class AttendanceSlot(models.Model):
+    division = models.CharField(max_length=10)
+    department = models.CharField(max_length=10)
+    slot_id = models.IntegerField()
+    unlocked = models.BooleanField(default = False)
+    date = models.DateField()

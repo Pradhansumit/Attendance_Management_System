@@ -9,7 +9,9 @@
 <link rel="stylesheet" href="{% static "main/css/custom.css" %}">
 </head>
 <body>
-{% block body %}{% endblock body %}
-<script src="{% static "main/css/bootstrap.min.js" %}"></script>
+  {% block body %}{% endblock body %}
+  <script src="{% static "main/js/bootstrap.min.js" %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"/></script>
+  <script src="{% static "main/js/custom.js" %}"></script>
 </body>
 </html>

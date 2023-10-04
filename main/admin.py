@@ -7,3 +7,5 @@ class AccountAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Accounts, AccountAdmin)
+admin.site.register(models.AttendanceSlot)
+
