@@ -61,40 +61,44 @@ def slot_creation(request):
     if request.method == "GET":
         slot_id = request.GET['slot_id']
         division_data = request.GET['division_data']
-        print(slot_id,division_data)
-        model = models.AttendanceSlot.objects
+        print("slot data",slot_id,"division data",division_data)
+        #print("type of division_data", type(division_data))
         
-        if division_data == 1:
+        if division_data == "1":
+            print("-------------")
+            print("Value ara")
+            print("-------------")
             department = "BCA"
             division = "A"
-            model.create(department=department,division = division, slot_id = slot_id, unlocked= True)
+            model = models.AttendanceSlot(department=department,division=division, slot_id=slot_id, unlocked=True)
+            model.save()
             
-        elif division_data == 2: 
+        elif division_data == "2": 
             department = "BCA"
             division = "B"
-            model.create(department=department,division = division, slot_id = slot_id, unlocked= True)
+            model.objects.create(department=department,division = division, slot_id = slot_id, unlocked= True)
             
-        elif division_data == 3: 
+        elif division_data == "3": 
             department = "BCA"
             division = "C"
-            model.create(department=department,division = division, slot_id = slot_id, unlocked= True)
+            model.objects.create(department=department,division = division, slot_id = slot_id, unlocked= True)
 
-        elif division_data == 4:
+        elif division_data == "4":
             department = "MCA"
             division = "A"
-            model.create(department=department,division = division, slot_id = slot_id, unlocked= True)
+            model.objects.create(department=department,division = division, slot_id = slot_id, unlocked= True)
         
-        elif division_data == 5:
+        elif division_data == "5":
             department = "MCA"
             division = "B"
-            model.create(department=department,division = division, slot_id = slot_id, unlocked= True)
+            model.objects.create(department=department,division = division, slot_id = slot_id, unlocked= True)
 
         data ={
             "message" : "created"
         }
         return JsonResponse(data)
 
-def slot_deletion(request):
-    if request.method == "GET":
-        slot_id = request.GET['slot_id']
-        division_data = request.GET['division_data']
+#def slot_deletion(request):
+    #if request.method == "GET":
+        #slot_id = request.GET['slot_id']
+        #division_data = request.GET['division_data']

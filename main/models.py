@@ -48,4 +48,3 @@ class AttendanceSlot(models.Model):
     department = models.CharField(max_length=10)
     slot_id = models.IntegerField()
     unlocked = models.BooleanField(default = False)
-    date = models.DateField()
