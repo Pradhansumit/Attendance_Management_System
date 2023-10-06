@@ -1,3 +1,6 @@
 [X] click on the unlock button to change the color and text -> i.e., lock to unlock and red to blue, respectively & vice versa
-[] click on the unlock/lock button to open and close the portal 
-[] click on the 
+[X] click on the unlock/lock button to open and close the portal 
+[] Specify which slot is open in student dashboard
+[] Login for the specific student to specific slot
+[] create a marked attendance slot
+[] click on mark attendance to store the attendance of the student

@@ -20,16 +20,30 @@ def Index(request):
             user = authenticate(
                 request, phone_number=phone_number, password=password)
             # to check the whether the user is returning any object or is None
+            attendance_slot = models.AttendanceSlot.objects.all()[0]
             # print(user, "is not valid")
             if user is not None:
                 login(request, user)
                 if login:
-                    if user.is_staff:
+                    if user.is_staff and not user.is_admin: 
                         return redirect('teacher_dashboard')
-                    elif user.is_admin:
+                    elif user.is_staff and user.is_admin: 
                         return redirect('admin_dashboard')
                     else:
-                        return redirect("student_dashboard")
+                        if attendance_slot:
+                            attn_div = attendance_slot.division
+                            attn_dept = attendance_slot.department
+                            user_div = request.user.division
+                            user_dept = request.user.department
+                            print("attn_div", attn_div, "attn_dept", attn_dept,"user_div", user_div,"user_dept",user_dept)
+                            #print("Student can enter")
+                            #print(request.user.department)
+                            if attn_div == user_div and attn_dept == user_dept:
+                                return redirect("student_dashboard")
+                            else:
+                                return render(request, "main/blank.html")
+                        else:
+                            raise ValueError("Attendance is locked")
 
         else:
             raise ValueError("Enter correct credentials")
@@ -54,6 +68,9 @@ def Teacher_dashboard(request):
 
 def Student_dashboard(request):
     user = request.user
+    print(user)
+    attendance = models.AttendanceSlot.objects.all()[0]
+    #print(attendance.slot_id)
     return render(request, 'main/student-dashboard.html', locals())
 
 
