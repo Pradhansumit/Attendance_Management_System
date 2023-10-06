@@ -12,26 +12,25 @@ $('#slot-btn-1').click(function () {
 
   if ($(this).hasClass("btn-primary")) {
     // alert("contains btn-primary")
-    $.ajax({
+    $.ajax({ // to delete the created slot
       type: "GET",
       url: "/slot_deletion",
       data: {
         slot_id: slot_btn1.value,
-        division_data: select_option.value,
       },
       success: function (data) {
-        alert('successful')
-        alert(alert.message)
+        alert('successful to delete a slot')
+        alert(data.message)
       },
       error: function () {
-        alert('failure')
+        alert('failure to delete a slot')
       }
     })
   }
 
   else if ($(this).hasClass("btn-danger")) {
     // alert("contains btn-danger")
-    $.ajax({
+    $.ajax({ // to create a new slot
       type: "GET",
       url: "/slot_creation",
       data: {
@@ -39,11 +38,11 @@ $('#slot-btn-1').click(function () {
         division_data: select_option.value,
       },
       success: function (data) {
-        alert("successful")
+        alert("successful to create a slot")
         alert(data.message)
       },
       error: function () {
-        alert("failure")
+        alert("failure to create a slot")
       }
     })
   }
