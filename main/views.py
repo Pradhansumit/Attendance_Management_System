@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Q
 from . import models
 from . import forms
 
@@ -52,7 +53,6 @@ def Index(request):
         form = forms.LoginForm()
         return render(request, "main/index.html", locals())
 
-
 def logout_view(request):
     logout(request)
     return redirect('home')
@@ -68,7 +68,6 @@ def Teacher_dashboard(request):
 
 def Student_dashboard(request):
     user = request.user
-    print(user)
     attendance = models.AttendanceSlot.objects.all()[0]
     #print(attendance.slot_id)
     return render(request, 'main/student-dashboard.html', locals())
@@ -136,5 +135,28 @@ def slot_deletion(request):
             }
             return JsonResponse(data)
 
+def mark_attendance(request):
+    if request.method == "GET":
+        rec_slot_id = request.GET["slot_id"]
+
+        attendance_slot = models.AttendanceSlot.objects.get(slot_id = rec_slot_id) #for the available slot
+        user = request.user #get current user i.e., student
         
+        ma_model = models.MarkedAttendance
+        
+        if ma_model.objects.filter(Q(user=user) & Q(slot_id=rec_slot_id)):
+            print("Attendance Marked Hai")
+            data = {
+                "message":"Attendance has been already marked..."
+            }
+        else:
+            print("Attendance Marked NAHI Hai!!!!")
+            ma_model.objects.create(
+                user=user,
+                department=attendance_slot.department,division = attendance_slot.division, slot_id = rec_slot_id
+            )
+            data = {
+                "message":"Attendance is marked"
+            }
+        return JsonResponse(data)
 

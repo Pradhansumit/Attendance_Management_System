@@ -2,8 +2,6 @@ const slot_btn1 = document.getElementById('slot-btn-1');
 const slot_btn2 = document.getElementById('slot-btn-2');
 const slot_btn3 = document.getElementById('slot-btn-3');
 const select_option = document.getElementById('division')
-console.log(slot_btn3.value)
-console.log($('#slot-btn-3').value)
 
 $('#slot-btn-1').click(function () {
   // alert('slot_btn1 has been click')
@@ -93,3 +91,20 @@ $('#slot-btn-2').click(function () {
 })
 
 
+$("#attendance_btn").click(function () {
+  alert('Mark Attendance has been clicked')
+  $.ajax({
+    type: "GET",
+    url: "/mark-attendance",
+    data: {
+      slot_id: $('#span_slot_id').text(),
+    },
+    success: function (data) {
+      //alert("Attendance is marked")
+      alert(data.message)
+    },
+    error: function (data) {
+      alert("ajax failed")
+    },
+  })
+})

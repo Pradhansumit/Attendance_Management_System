@@ -48,3 +48,12 @@ class AttendanceSlot(models.Model):
     department = models.CharField(max_length=10)
     slot_id = models.IntegerField()
     unlocked = models.BooleanField(default = False)
+
+
+
+class MarkedAttendance(models.Model):
+    user = models.ForeignKey(Accounts, on_delete=models.PROTECT, related_name="ma_user")
+    division = models.CharField(max_length=10)
+    department = models.CharField(max_length=10)
+    slot_id = models.IntegerField()
+    date_time = models.DateTimeField(auto_now_add=True)
