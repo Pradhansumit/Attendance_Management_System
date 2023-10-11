@@ -10,4 +10,6 @@ urlpatterns = [
     path('slot_creation/', views.slot_creation, name="slot_creation"),
     path('slot_deletion/', views.slot_deletion, name="slot_deletion"),
     path('mark-attendance/', views.mark_attendance, name="mark_attendance"),
+    path('check_slot/', views.check_slot, name="check_slot"),
+    
 ]

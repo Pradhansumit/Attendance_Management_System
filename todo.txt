@@ -5,3 +5,5 @@
 [X] create a marked attendance model to store the student attendance.
 [X] click on mark attendance to store the attendance of the student
 [X] alert "already marked attendance" if the student marked attendance already exists. 
+[X] show the button red (even after hard refresh) which is locked
+[X] change innertext to "lock" when the button is red and "unlock" when it blue

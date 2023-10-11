@@ -59,18 +59,30 @@ def logout_view(request):
 
 
 def Admin_dashboard(request):
-    return render(request, 'main/admin-dashboard.html', locals())
+    if request.user.is_staff and request.user.is_admin:
+        return render(request, 'main/admin-dashboard.html', locals())
+    else:
+        raise ValueError("You're not permitted to enter here...")
+
 
 
 def Teacher_dashboard(request):
+    #if request.user.is_staff:
+    #model = models.AttendanceSlot.objects.all()[0]
+    #print("Model ->", model)
     return render(request, 'main/teacher-dashboard.html', locals())
+    #else:
+        #raise ValueError("You're not permitted to enter here...")
 
 
 def Student_dashboard(request):
-    user = request.user
-    attendance = models.AttendanceSlot.objects.all()[0]
-    #print(attendance.slot_id)
-    return render(request, 'main/student-dashboard.html', locals())
+    if not request.user.is_staff :
+        user = request.user
+        attendance = models.AttendanceSlot.objects.all()[0]
+        #print(attendance.slot_id)
+        return render(request, 'main/student-dashboard.html', locals())
+    else:
+        raise ValueError("You're not permitted to enter here...")
 
 
 # to create a new slot for attendance
@@ -94,22 +106,26 @@ def slot_creation(request):
             elif division_data == "2": 
                 department = "BCA"
                 division = "B"
-                model.objects.create(department=department,division = division, slot_id = slot_id, unlocked= True)
+                model = models.AttendanceSlot(department=department,division=division, slot_id=slot_id, unlocked=True)
+                model.save()
                 
             elif division_data == "3": 
                 department = "BCA"
                 division = "C"
-                model.objects.create(department=department,division = division, slot_id = slot_id, unlocked= True)
+                model = models.AttendanceSlot(department=department,division=division, slot_id=slot_id, unlocked=True)
+                model.save()
 
             elif division_data == "4":
                 department = "MCA"
                 division = "A"
-                model.objects.create(department=department,division = division, slot_id = slot_id, unlocked= True)
+                model = models.AttendanceSlot(department=department,division=division, slot_id=slot_id, unlocked=True)
+                model.save()
             
             elif division_data == "5":
                 department = "MCA"
                 division = "B"
-                model.objects.create(department=department,division = division, slot_id = slot_id, unlocked= True)
+                model = models.AttendanceSlot(department=department,division=division, slot_id=slot_id, unlocked=True)
+                model.save()
 
             data ={
                 "message" : "created"
@@ -144,7 +160,7 @@ def mark_attendance(request):
         
         ma_model = models.MarkedAttendance
         
-        if ma_model.objects.filter(Q(user=user) & Q(slot_id=rec_slot_id)):
+        if ma_model.objects.filter(Q(user=user) & Q(slot_id=rec_slot_id) & Q(division = user.division)):
             print("Attendance Marked Hai")
             data = {
                 "message":"Attendance has been already marked..."
@@ -160,3 +176,13 @@ def mark_attendance(request):
             }
         return JsonResponse(data)
 
+def check_slot(request):
+    model = models.AttendanceSlot.objects.all()
+    if model:
+        slot_id = model[0].slot_id
+        data = {
+            "slot_id":slot_id,
+            "message":"model is present"
+        }
+
+        return JsonResponse(data)
