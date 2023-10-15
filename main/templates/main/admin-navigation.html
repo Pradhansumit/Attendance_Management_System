@@ -1,0 +1,13 @@
+
+
+    <div class="row bg-gray">
+      <nav class="d-flex flex-direction-row align-items-center justify-content-end">
+        <ul class="d-flex flex-direction-row align-items-center justify-content-end  remove-bullet pe-3">
+          <li class="nav-links"><a href="{% url "admin_dashboard" %}" class="nav-link p-4">Dashboard</a></li>
+          <li class="nav-links"><a href="{% url "admin_dashboard_teacher" %}" class="nav-link p-4">Teachers</a></li>
+          <li class="nav-links"><a href="{% url "admin_dashboard_student" %}" class="nav-link p-4">Students</a></li>
+          <li class="nav-links"><a href="{% url "admin_dashboard_register" %}" class="nav-link p-4">Register</a></li>
+          <a class="btn btn-warning" href="{% url "logout" %}">Logout</a>
+        </ul>
+      </nav>
+    </div>

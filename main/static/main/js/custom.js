@@ -23,7 +23,7 @@ $(document).ready(function () {
       }
     },
     error: function () {
-      alert("No slot is opened!!!")
+      console.log("No slot is opened!!!")
     }
   })
 })

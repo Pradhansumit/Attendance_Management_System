@@ -7,3 +7,6 @@
 [X] alert "already marked attendance" if the student marked attendance already exists. 
 [X] show the button red (even after hard refresh) which is locked
 [X] change innertext to "lock" when the button is red and "unlock" when it blue
+[X] Admin can see all the teacher and all the students also see attendance.
+[X] Admin can add new teacher/student
+[] Can see user information in the dashboard's profile page.

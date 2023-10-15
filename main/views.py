@@ -21,16 +21,19 @@ def Index(request):
             user = authenticate(
                 request, phone_number=phone_number, password=password)
             # to check the whether the user is returning any object or is None
-            attendance_slot = models.AttendanceSlot.objects.all()[0]
             # print(user, "is not valid")
             if user is not None:
                 login(request, user)
                 if login:
+                    #for teacher login
                     if user.is_staff and not user.is_admin: 
                         return redirect('teacher_dashboard')
+                    #for admin login
                     elif user.is_staff and user.is_admin: 
                         return redirect('admin_dashboard')
+                    #for student login
                     else:
+                        attendance_slot = models.AttendanceSlot.objects.all()[0]
                         if attendance_slot:
                             attn_div = attendance_slot.division
                             attn_dept = attendance_slot.department
@@ -60,11 +63,40 @@ def logout_view(request):
 
 def Admin_dashboard(request):
     if request.user.is_staff and request.user.is_admin:
+        attendance_model = models.MarkedAttendance.objects.all()
         return render(request, 'main/admin-dashboard.html', locals())
     else:
         raise ValueError("You're not permitted to enter here...")
 
 
+def Admin_dashboard_teacher(request):
+    if request.user.is_staff and request.user.is_admin:
+        teachers = models.Accounts.objects.all()
+        return render(request, 'main/admin-teacher-list.html', locals())
+    else:
+        raise ValueError("You're not permitted to enter here...")
+
+def Admin_dashboard_register(request):
+    if request.user.is_staff and request.user.is_admin:
+        if request.method == "POST":
+            print("Hello Form!!!")
+            form = forms.RegisterAccount(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('admin_dashboard')
+        else:
+            form = forms.RegisterAccount()
+                
+        return render(request, 'main/admin-register.html', locals())
+    else:
+        raise ValueError("You're not permitted to enter here...")
+
+def Admin_dashboard_student(request):
+    if request.user.is_staff and request.user.is_admin:
+        students = models.Accounts.objects.all()
+        return render(request, 'main/admin-student-list.html', locals())
+    else:
+        raise ValueError("You're not permitted to enter here...")
 
 def Teacher_dashboard(request):
     #if request.user.is_staff:
@@ -186,3 +218,8 @@ def check_slot(request):
         }
 
         return JsonResponse(data)
+
+def Profile(request,id):
+    pi = models.Accounts.objects.get(pk=id)
+    form = forms.RegisterAccount(instance=pi)
+    return render(request, 'main/profile.html',locals())
